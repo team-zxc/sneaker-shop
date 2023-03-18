@@ -1,0 +1,22 @@
+.main_container {
+    width: 100%;
+}
+
+.category_container {
+    width: 80%;
+    margin: 0 auto 50px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.items_category {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.items_container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
