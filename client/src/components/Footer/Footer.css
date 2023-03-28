@@ -1,4 +1,4 @@
-.footer_container {
+.footer__container {
     width: 100%;
     height: auto;
     background-color: #D9D9D9;
@@ -6,7 +6,7 @@
     padding: 16px;
 }
 
-.footer_content {
+.footer__content {
     height: 100%;
     margin: auto;
     display: flex;
@@ -15,24 +15,24 @@
 
 }
 
-.footer_middle {
+.footer__middle {
     display: flex;
     flex-direction: column;
 }
 
-.footer_middle-links {
+.footer__middle-links {
     display: flex;
     flex-direction: column;
 }
 
-.footer_right {
+.footer__right {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-start;
 }
 
-.footer_link-icon {
+.footer__link-icon {
     cursor: pointer;
     text-decoration: none;
 }
@@ -57,7 +57,7 @@
     background-image: url(../../assets/instagram.svg);
 }
 
-.footer_link-number {
+.footer__link-number {
     color: black;
     text-decoration: none;
     padding-left: 29px;
@@ -67,7 +67,7 @@
     background-repeat: no-repeat;
 }
 
-.footer_link-telegram {
+.footer__link-telegram {
     color: black;
     text-decoration: none;
     padding-left: 29px;
@@ -77,7 +77,7 @@
     background-repeat: no-repeat;
 }
 
-.footer_link-email {
+.footer__link-email {
     color: black;
     text-decoration: none;
     padding-left: 29px;

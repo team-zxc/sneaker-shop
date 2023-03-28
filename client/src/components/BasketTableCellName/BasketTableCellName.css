@@ -1,0 +1,18 @@
+.table__cell--name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell__title {
+
+}
+
+.cell__brand {
+
+}
+
+.cell__size {
+
+}

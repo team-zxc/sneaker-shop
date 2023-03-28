@@ -1,21 +1,17 @@
 import { makeAutoObservable } from 'mobx';
 
-export default class ItemStore {
+export default class BasketStore {
     constructor() {
         this._items = [];
-        this._models = [];
         makeAutoObservable(this);
     }
     setItems(items) {
         this._items = items;
     }
+    addItem(item) {
+        this._items.push(item);
+    }
     get items() {
         return this._items;
-    }
-    setModels(models) {
-        this._models = models;
-    }
-    get models() {
-        return this._models;
     }
 }

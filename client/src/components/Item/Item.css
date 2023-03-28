@@ -1,12 +1,12 @@
-.item_container {
+.item__container {
     width: calc(100%/3);
     cursor: pointer;
     margin-bottom: 20px;
 }
 
-.item_link:active,
-.item_link:hover,
-.item_link {
+.item__link:active,
+.item__link:hover,
+.item__link {
     text-decoration: none;
     color: black;
     width: 100%;
@@ -14,18 +14,18 @@
     flex-direction: column;
 }
 
-.item_image {
+.item__image {
     width: 100%;
     object-fit: contain;
 }
 
-.item_description {
+.item__description {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.item_title {
+.item__title {
     text-align: center;
 }
