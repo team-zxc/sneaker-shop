@@ -1,0 +1,14 @@
+.item__size-blocks-item {
+  margin-bottom: 10px;
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: 1px solid black;
+  font-weight: normal;
+  font-size: 16px;
+  font-family: Inter;
+  cursor: pointer;
+}
+
+.item__size-blocks-item:hover {
+  background-color: #D9D9D9;
+}

@@ -1,33 +1,48 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import img from '../../assets/test.webp';
 import { uid } from 'uid';
 import './ItemPage.css';
-import { Context } from '../../index';
 import { useParams } from 'react-router-dom';
 import items from '../../items';
-// import baskets from '../../baskets';
 import { Spinner } from 'react-bootstrap';
+import ColorSizeBlock from '../../components/ColorSizeBlock/ColorSizeBlock';
 
 const ItemPage = () => {
-    const { basket } = useContext(Context);
     const [sneaker, setSneaker] = useState(null);
     const { id } = useParams();
+    const [blocks, setBlocks] = useState([]);
+    useEffect(() => {
+        const curSneaker = items.find((item) => item.id === id);
+        setSneaker(curSneaker);
+        setBlocks(curSneaker.sizes.map((size) => ({id: uid(), color: 'FFFFFF', size: size })));
+    }, [id]);
+    
     const [sz, setSz] = useState(null);
+    const [bsk, setBsk] = useState(
+        JSON.parse(localStorage.getItem('basket')) || []
+    )
+
+    const handleBlockClick = (id) => {
+        const newBlocks = blocks.map((block) => {
+            if (block.id === id) {
+                setSz(block.size.size);
+                return { ...block, color: '#D9D9D9' };
+            } else {
+                return { ...block, color: '#FFFFFF' };
+            }
+        });
+        setBlocks(newBlocks);
+    }
 
     // useEffect(() => {
     //     fetchOneItem(id).then(data => setSneaker(data))
     // }, [id])
 
     // Раскомментировать код выше и заменить
-    useEffect(() => {
-        const curSneaker = items.find((item) => item.id === id);
-        setSneaker(curSneaker);
-    }, [id]);
 
-    // useEffect(() => {
-    //     fetchBasketItems().then(data => basket.setItems(data))
-    //     basket.setItems(baskets);
-    // }, [basket]);
+    useEffect(() => {
+        localStorage.setItem('basket', JSON.stringify(bsk))
+    }, [bsk]);
 
     if (!sneaker) {
         return (
@@ -37,25 +52,24 @@ const ItemPage = () => {
         );
     };
 
-    const handleClick = (event) => {
-        setSz(event.target.value);
-    };
-
     const handleHi = (event) => {
-        alert('Товар размером ' + sz + ' добавлен в корзину!');
         event.preventDefault();
-        basket.addItem({
-            id: sneaker.id,
-            image: sneaker.image,
-            brand: sneaker.brand,
-            model: sneaker.model,
-            type: sneaker.type,
-            name: sneaker.name,
-            price: sneaker.sizes.find((i) => i.size === sz).amount,
-            size: sz,
-            count: 1,
-        });
-        // Добавлять в localStorage, и заполнять basket этими данными
+        if(!Boolean(bsk.find((b) => b.id === sneaker.id && b.size === sz))) {
+            setBsk([...bsk, {
+                id: sneaker.id,
+                image: sneaker.image,
+                brand: sneaker.brand,
+                model: sneaker.model,
+                type: sneaker.type,
+                name: sneaker.name,
+                price: sneaker.sizes.find((i) => i.size === sz).amount,
+                size: sz,
+                count: 1,
+            }]);
+            alert('Товар размером ' + sz + ' добавлен в корзину!');
+        } else {
+            alert('Этот товар уже в корзине!');
+        }
     };
 
     return (
@@ -104,15 +118,13 @@ const ItemPage = () => {
                     <form onSubmit={handleHi}>
                         <div className="item__size-blocks-container">
                             <ul className="item__size-blocks-list">
-                                {sneaker.sizes.map((size) => (
-                                    <li
-                                        key={uid()}
-                                        className="item__size-blocks-item"
-                                        value={size.size}
-                                        onClick={handleClick}
-                                    >
-                                        {size.size}
-                                    </li>
+                                {blocks.map((block) => (
+                                    <ColorSizeBlock
+                                        key={block.id}
+                                        color={block.color}
+                                        handleClick={() => handleBlockClick(block.id)}
+                                        size={block.size}
+                                    />
                                 ))}
                             </ul>
                         </div>
@@ -126,7 +138,9 @@ const ItemPage = () => {
                         </div>
                     </form>
                 </div>
-                <div>{sneaker.description}</div>
+                <div className="item__description">
+                    {sneaker.description}
+                </div>
             </div>
         </div>
     );

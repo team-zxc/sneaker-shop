@@ -1,6 +1,6 @@
 import React from 'react';
 import './BasketPage.css';
-import BasketTable from '../../components/BasketTable/BasketTable'
+import BasketTable from '../../components/BasketTable/BasketTable';
 
 const BasketPage = () => {
     return (
