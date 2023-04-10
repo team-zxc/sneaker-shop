@@ -1,10 +1,10 @@
 import React from 'react';
 import './BasketTableCellPrice.css';
 
-const BasketTableCellPrice = ({ cell }) => {
+const BasketTableCellPrice = ({ data }) => {
     return (
         <div className='table__cell--price'>
-            {cell.price * cell.count}
+            {data.price * data.count}
         </div>
     );
 };

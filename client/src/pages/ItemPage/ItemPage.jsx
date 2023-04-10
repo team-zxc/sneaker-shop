@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import img from '../../assets/test.webp';
 import { uid } from 'uid';
 import './ItemPage.css';
@@ -6,8 +6,10 @@ import { useParams } from 'react-router-dom';
 import items from '../../items';
 import { Spinner } from 'react-bootstrap';
 import ColorSizeBlock from '../../components/ColorSizeBlock/ColorSizeBlock';
+import { Context } from '../../index';
 
 const ItemPage = () => {
+    const { basketItem } = useContext(Context);
     const [sneaker, setSneaker] = useState(null);
     const { id } = useParams();
     const [blocks, setBlocks] = useState([]);
@@ -55,7 +57,7 @@ const ItemPage = () => {
     const handleHi = (event) => {
         event.preventDefault();
         if(!Boolean(bsk.find((b) => b.id === sneaker.id && b.size === sz))) {
-            setBsk([...bsk, {
+            const newBskItem = {
                 id: sneaker.id,
                 image: sneaker.image,
                 brand: sneaker.brand,
@@ -65,8 +67,10 @@ const ItemPage = () => {
                 price: sneaker.sizes.find((i) => i.size === sz).amount,
                 size: sz,
                 count: 1,
-            }]);
+            };
+            setBsk([...bsk, newBskItem]);
             alert('Товар размером ' + sz + ' добавлен в корзину!');
+            basketItem.addItem(newBskItem);
         } else {
             alert('Этот товар уже в корзине!');
         }

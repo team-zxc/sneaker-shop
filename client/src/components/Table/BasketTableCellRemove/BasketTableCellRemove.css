@@ -1,0 +1,12 @@
+.table__cell--remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete__btn {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  background: url("../../../assets/delete-btn.svg") no-repeat center;
+}

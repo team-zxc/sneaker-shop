@@ -8,6 +8,7 @@ const BasketTableHeader = () => {
         <div className="table__cell--header"></div>
         <div className="table__cell--header" style={{textAlign: 'center'}}>КОЛИЧЕСТВО</div>
         <div className="table__cell--header" style={{textAlign: 'center'}}>СТОИМОСТЬ</div>
+        <div className="table__cell--header"></div>
     </div>
     );
 };

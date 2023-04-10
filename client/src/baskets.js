@@ -8,6 +8,7 @@ const basket = [
     //     name: 'Smoke Grey',
     //     price: 9000,
     //     size: 40,
+    //     renderedSize: "EU 42",
     //     count: 1,
     // },
     // {

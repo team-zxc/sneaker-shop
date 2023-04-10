@@ -1,16 +1,32 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import BasketTableRow from '../BasketTableRow/BasketTableRow';
 import BasketTableHeader from '../BasketTableHeader/BasketTableHeader';
 import { uid } from 'uid';
 import './BasketTable.css';
-// import { Context } from '../../index';
+import { Context } from '../../../index';
 
 const BasketTable = () => {
-    // const { basketItem } = useContext(Context);
-    const [bsk] = useState(() => {
-        const storedBasket = localStorage.getItem('basket');
-        return storedBasket !== null ? JSON.parse(storedBasket) : [];
-    });
+    const { basketItem } = useContext(Context);
+    const [basketItemsState, setBasketItemsState] = useState(basketItem.items);
+
+    const updateBasket = (itemId, size, count) => {
+        const updatedBasket = basketItemsState.map((item) => {
+        if (item.id === itemId && item.size === size) {
+            return { ...item, count };
+        }
+        return item;
+        });
+        setBasketItemsState(updatedBasket);
+        basketItem.setItems(updatedBasket);
+    };
+
+    const removeItem = (item) => {
+        const updatedBasket = basketItemsState.filter(i => i.id !== item.id || i.size !== item.size);
+        // basketItemsState.map((b) => console.log(b.id))
+        // updatedBasket.map((b) => console.log(b.id))
+        setBasketItemsState(updatedBasket);
+        basketItem.setItems(updatedBasket);
+    }
 
     const sum = (arr) => {
         let res = 0;
@@ -25,25 +41,21 @@ const BasketTable = () => {
         alert("Информация о заказе поступит на почту!");
     }
 
-    useEffect(() => {
-        localStorage.setItem('basket', JSON.stringify(bsk))
-    }, [bsk]);
-
     return (
         <form className="table" onSubmit={handleSend}>
             <BasketTableHeader />
-            {bsk.length > 0 ?
-                bsk.map((item) => (
-                    <BasketTableRow key={uid()} item={item} />
+            {basketItem.items.length > 0 ?
+                basketItem.items.map((item) => (
+                    <BasketTableRow key={uid()} item={item} updateBasket={updateBasket} removeItem={removeItem} />
                 ))
                 :
                 <div className="empty__basket">Корзина пуста</div>
             }
             <div className="sum">
-                Итого: {sum(bsk)}
+                Итого: {sum(basketItem.items)}
             </div>
             <div className="btn__container">
-                {bsk.length > 0 ?
+                {basketItem.items.length > 0 ?
                     <input
                         className="done__button"
                         type="submit"
@@ -51,7 +63,7 @@ const BasketTable = () => {
                     />
                     :
                     <input
-                        className="done__button-disabled"
+                        className="done__button"
                         type="submit"
                         value="Оформить заказ"
                         disabled
