@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "lookout"
+version = "0.1.0"
+description = ""
+authors = ["ayfokin <ayfokin@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "4.2"
+psycopg2 = "2.9.6"
+django-autocomplete-light = "3.9.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
