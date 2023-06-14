@@ -1,13 +1,21 @@
-from views import CategoryAutocompleteView
+# from views import CategoryAutocompleteView
+#
+# from django.urls import re_path as url
+#
+# from .models import Footwear
+#
+# urlpatterns = [
+#     url(
+#         '^footwear_category_autocomplete/$',
+#         CategoryAutocompleteView.as_view(model=Footwear),
+#         name='footwear-category-autocomplete'
+#     ),
+# ]
+from django.urls import path
 
-from django.urls import re_path as url
-
-from .models import Footwear
+from .views import FootwearAPIView, BrandAPIView
 
 urlpatterns = [
-    url(
-        '^footwear_category_autocomplete/$',
-        CategoryAutocompleteView.as_view(model=Footwear),
-        name='footwear-category-autocomplete'
-    ),
+    path('sneakers/', FootwearAPIView.as_view()),
+    path('brands/', BrandAPIView.as_view()),
 ]
