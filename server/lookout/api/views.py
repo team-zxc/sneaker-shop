@@ -11,8 +11,18 @@ from .serializers import BrandSerializer, FootwearSerializer
 
 
 class FootwearAPIView(ListAPIView):
-    queryset = Footwear.objects.all()
+#     queryset = Footwear.objects.all()
     serializer_class = FootwearSerializer
+
+    def get_queryset(self):
+        queryset = Footwear.objects.all()
+        brand = self.request.GET.get('brand')
+
+        # Фильтрация по бренду, если параметр brand передан
+        if brand:
+            queryset = queryset.filter(brand__title=brand)
+
+        return queryset
 
 
 class BrandAPIView(ListAPIView):

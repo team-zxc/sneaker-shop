@@ -110,8 +110,29 @@ class Footwear(models.Model):
     vendor_code = models.CharField(max_length=255, verbose_name='Артикул')
     description = models.TextField(verbose_name='Описание')
 
+    def get_category_display(self):
+        return self.category.title
+
+    def get_brand_display(self):
+        return self.brand.title
+
+    def get_model_display(self):
+        return self.model.title
+
+    def get_image_names(self):
+        images = Images.objects.filter(footwear_id=self.id)
+        return [str(image.image) for image in images]
+
+    def get_sizes(self):
+        instances = self.footwearinstance_set.all()
+        return [instance.get_size_amount_dict() for instance in instances]
+
+#     def __str__(self):
+#         return f'{self.category} {self.brand} {self.model} {self.name}'
+
     def __str__(self):
-        return f'{self.category} {self.brand} {self.model} {self.name}'
+        return f'{self.get_category_display()} {self.get_brand_display()} {self.get_model_display()} {self.name}'
+
 
 
 class FootwearInstance(models.Model):
@@ -126,6 +147,9 @@ class FootwearInstance(models.Model):
     )
     size = models.IntegerField(verbose_name='Размер')
     price = models.IntegerField(verbose_name='Цена')
+
+    def get_size_amount_dict(self):
+        return {'size': self.size, 'amount': self.price}
 
 
 class Images(models.Model):
