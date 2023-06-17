@@ -1,3 +1,76 @@
+/* Fonts */
+
+@font-face {
+    font-family: "Bruno Ace";
+    src: url("./fonts/bruno-ice/BrunoAceSC-Regular.woff") format("woff"), url("./fonts/bruno-ice/BrunoAceSC-Regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Baloo";
+    src: url("./fonts/baloo2/Baloo2-Regular.woff") format("woff"), url("./fonts/baloo2/Baloo2-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Baloo";
+    src: url("./fonts/baloo2/Baloo2-Medium.woff") format("woff"), url("./fonts/baloo2/Baloo2-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Baloo";
+    src: url("./fonts/baloo2/Baloo2-SemiBold.woff") format("woff"), url("./fonts/baloo2/Baloo2-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Baloo";
+    src: url("./fonts/baloo2/Baloo2-Bold.woff") format("woff"), url("./fonts/baloo2/Baloo2-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Baloo";
+    src: url("./fonts/baloo2/Baloo2-ExtraBold.woff") format("woff"), url("./fonts/baloo2/Baloo2-ExtraBold.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "ProximaNova";
+    src: url("./fonts/proxima/ProximaNovaT-Thin.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "ProximaNova";
+    src: url("./fonts/proxima/ProximaNova-Light.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "ProximaNova";
+    src: url("./fonts/proxima/ProximaNova-Regular.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "ProximaNova";
+    src: url("./fonts/proxima/ProximaNova-Semibold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "ProximaNova";
+    src: url("./fonts/proxima/ProximaNova-Bold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "ProximaNova";
+    src: url("./fonts/proxima/ProximaNova-Extrabld.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+}
+
 /* Указываем box sizing */
 *,
 *::before,
@@ -31,10 +104,14 @@ dd {
 
 /* Выставляем основные настройки по-умолчанию для body */
 body {
+    background: #E9E9E9;
     min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
+    font-family: Baloo, sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
@@ -68,7 +145,7 @@ select {
 }
 
 .app {
-
+    position: relative;
 }
 
 /* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */

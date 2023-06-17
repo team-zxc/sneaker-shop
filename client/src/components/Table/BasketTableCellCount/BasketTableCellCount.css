@@ -2,31 +2,40 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .counter {
-  font-size: 30px;
-  font-weight: bold;
+  font-family: Baloo, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 51px;
 }
 
 .decrement__button {
-  transform: translateY(-2px);
   padding: 10px 20px;
+  font-family: Baloo, sans-serif;
+  font-style: normal;
+  font-weight: 500;
   font-size: 20px;
-  font-weight: bold;
+  line-height: 32px;
   background: none;
   border: none;
   cursor: pointer;
 }
 
 .decrement__button:disabled {
-  cursor: auto;
+  cursor: no-drop;
 }
 
 .increment__button {
   padding: 10px 20px;
+  font-family: Baloo, sans-serif;
+  font-style: normal;
+  font-weight: 500;
   font-size: 20px;
-  font-weight: bold;
+  line-height: 32px;
   background: none;
   border: none;
   cursor: pointer;

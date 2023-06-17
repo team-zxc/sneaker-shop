@@ -1,14 +1,7 @@
 const basket = [
     // {
     //     id: 's1',
-    //     image: 'test.webp',
-    //     brand: 'Nike',
-    //     model: 'Air Jordan 1',
-    //     type: 'Mid',
-    //     name: 'Smoke Grey',
-    //     price: 9000,
     //     size: 40,
-    //     renderedSize: "EU 42",
     //     count: 1,
     // },
     // {

@@ -1,6 +1,14 @@
 .basket__main-container {
     width: 80%;
-    margin: 0 auto;
-    margin-bottom: 60px;
+    margin: 50px auto;
+}
+
+.basket__title {
+    font-family: ProximaNova, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    margin-bottom: 50px;
 }
 

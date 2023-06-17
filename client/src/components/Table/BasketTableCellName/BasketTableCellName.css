@@ -3,39 +3,38 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.cell__title {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  /* font-size: 21px; */
-  line-height: 25px;
+  padding: 20px;
 }
 
 .cell__brand {
-  font-family: 'Inter';
+  font-family: Baloo, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 26px;
   color: rgba(0, 0, 0, 0.5);
 }
 
 .cell__size {
-  font-family: 'Inter';
+  font-family: ProximaNova, sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 26px;
+}
+
+.item__link--name {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    font-family: Baloo, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 34px;
 }
 
 .item__link--name:active,
-.item__link--name:hover,
-.item__link--name {
-    /* text-decoration: none; */
-    color: black;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+.item__link--name:hover {
+  color: #0d6efd;
 }

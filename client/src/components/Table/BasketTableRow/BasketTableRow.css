@@ -2,4 +2,5 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr) 0.4fr;
   text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
 }

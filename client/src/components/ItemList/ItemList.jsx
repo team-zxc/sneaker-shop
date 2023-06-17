@@ -10,8 +10,8 @@ const ItemList = observer(({ model }) => {
 
     return (
         <ul className="items__container">
-            {item.items
-                .filter((snk) => snk.model === model)
+            {item.items[Object.keys(item.items)
+                .filter((mod) => mod === model)]
                 .map((sneaker) => (
                     <Item key={uid()} item={sneaker} />
                 ))

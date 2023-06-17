@@ -5,10 +5,8 @@ import { Link } from 'react-router-dom';
 const BasketTableCellName = ({ data }) => {
     return (
         <div className='table__cell--name'>
-            <Link to={`/sneaker/${data.id}`} className="item__link--name">
-                <div className="cell__title">
-                    {data.model} {data.type} {data.name}
-                </div>
+            <Link to={`/sneakers/${data.id}`} className="item__link--name">
+                {data.model} {data.type} {data.name}
             </Link>
             <div className="cell__brand">
                 {data.brand}

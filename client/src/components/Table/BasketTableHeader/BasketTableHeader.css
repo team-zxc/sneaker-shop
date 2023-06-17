@@ -1,10 +1,15 @@
 .table__row--header {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 0.4fr;
-  text-align: left;
+  text-align: center;
 }
 
 .table__cell--header {
   padding: 5px 10px;
-  font-weight: bold;
+  font-family: ProximaNova, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  color: rgba(0, 0, 0, 0.5);
 }
