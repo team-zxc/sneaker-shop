@@ -1,0 +1,18 @@
+.slide {
+    /*flex: 1 0 100%;*/
+    text-decoration: none;
+    color: #000000;
+    position: relative;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.fadeInAnimation {
+    animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

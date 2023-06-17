@@ -1,0 +1,9 @@
+.slide-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-family: Baloo, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}

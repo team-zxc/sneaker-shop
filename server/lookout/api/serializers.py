@@ -20,7 +20,7 @@ class FootwearSerializer(serializers.ModelSerializer):
         return obj.get_sizes()
 
     def get_images(self, obj):
-            return obj.get_image_names()
+        return obj.get_image_names()
 
     class Meta:
         model = Footwear
@@ -31,5 +31,3 @@ class FootwearSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         pass
-
-

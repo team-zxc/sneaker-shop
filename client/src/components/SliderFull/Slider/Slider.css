@@ -1,0 +1,46 @@
+.slider {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.slider__title {
+    font-family: 'ProximaNova', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 77px;
+    color: #FFFFFF;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.btn__all {
+    z-index: 800;
+    text-decoration: none;
+    width: 300px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(217, 217, 217, 0.56);
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    font-family: 'ProximaNova', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 39px;
+    color: #000000;
+    transform: scale(1);
+}
+
+.btn__all:hover {
+    transform: scale(1.05);
+    color: #000000;
+}

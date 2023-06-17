@@ -1,0 +1,86 @@
+.toast_custom {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    max-width: 330px;
+    height: 80px;
+    border-radius: 12px;
+    background: #fff;
+    padding: 20px 35px 20px 25px;
+    box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /*transform: translateX(calc(100% + 30px));*/
+    /*transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast_custom .close_custom {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 5px;
+    cursor: pointer;
+    background: url('../../assets/delete-btn.svg') no-repeat center;
+    opacity: 0.3;
+}
+
+.toast_custom .close_custom:hover {
+    opacity: 0.5;
+}
+
+/*.toast_custom.active {*/
+/*    transform: translateX(0%);*/
+/*}*/
+
+.toast_custom .toast-content_custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-content_custom .message_custom {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.message_custom .text_custom {
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.toast_custom .progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+}
+
+.progress.active:before {
+    animation: progress 5s linear forwards;
+}
+
+.toast_custom .progress:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #4070f4;
+}
+
+@keyframes progress {
+    0% {
+        right: 0;
+    }
+    100% {
+        right: 100%;
+    }
+}

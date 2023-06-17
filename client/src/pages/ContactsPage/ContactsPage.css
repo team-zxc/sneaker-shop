@@ -1,0 +1,30 @@
+.contacts__container {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contacts__title {
+
+}
+
+.contacts__content {
+    width: 100%;
+}
+
+.contacts__description {
+    text-align: center;
+}
+
+.links__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item__contacts {
+
+}

@@ -1,0 +1,25 @@
+.dropdown__menu {
+    position: absolute;
+    /*left: -5vw;*/
+    top: 67px;
+    display: flex;
+    /*width: 90vw;*/
+    height: 50px;
+    align-items: center;
+    justify-content: flex-start;
+    /*border: 1px solid rgba(0, 0, 0, 0.2);*/
+    /*border-radius: 10px;*/
+}
+
+.menu__links {
+    text-decoration: none;
+    color: #000000;
+}
+
+/*.menu__links:first-child {*/
+/*    margin-left: 5vw;*/
+/*}*/
+
+.menu__links:not(:last-child) {
+    margin-right: 20px;
+}
