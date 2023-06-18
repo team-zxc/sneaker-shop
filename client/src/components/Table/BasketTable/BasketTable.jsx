@@ -59,24 +59,24 @@ const BasketTable = observer(() => {
                 count: value.count
             })),
         }
-        console.log(combinedData);
+        // console.log(combinedData);
         // Отправка POST-запроса на сервер
-        // fetch('server-address', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(combinedData),
-        // })
-        // .then((response) => response.json())
-        // .then((data) => {
-        //     // Обработка ответа от сервера
-        //     console.log(data);
-        // })
-        // .catch((error) => {
-        //     // Обработка ошибок
-        //     console.error(error);
-        // });
+        fetch(process.env.REACT_APP_SERVER_ADDRESS + '/api/v1/order/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(combinedData),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            // Обработка ответа от сервера
+            console.log(data);
+        })
+        .catch((error) => {
+            // Обработка ошибок
+            console.error(error);
+        });
 
         setFlag(false);
     };

@@ -5,10 +5,14 @@ import {Link} from "react-router-dom";
 
 import "./Slide.css";
 
-export default function Slide({ data: { image, model, name, id }, animation }) {
+export default function Slide({ data: { images, model, name, id }, animation }) {
+    const get_first_image = (data) => {
+        return data[0]
+    }
+
     return (
         <Link to={`/sneakers/${id}`} className={`slide ${animation && 'fadeInAnimation'}`}>
-            <SlideImage src={image} alt={model} />
+            <SlideImage src={process.env.REACT_APP_SERVER_ADDRESS + '/' + get_first_image(images)} alt={model} />
             <SlideTitle title={{model, name}} />
         </Link>
     );

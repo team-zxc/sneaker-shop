@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
-import img from '../../assets/test.webp';
+// import img from '../../assets/test.webp';
 import { uid } from 'uid';
 import './ItemPage.css';
 import { useParams } from 'react-router-dom';
-import items from '../../items';
 import { Spinner } from 'react-bootstrap';
 import ColorSizeBlock from '../../components/ColorSizeBlock/ColorSizeBlock';
-import { Context } from '../../index';
 import Notification from "../../components/Notification/Notification";
+
+import { Context } from '../../index';
+// import items from '../../items';
+import {fetchOneItem} from "../../http/itemApi";
 
 const ItemPage = () => {
     const [notificationTimer, setNotificationTimer] = useState(null);
@@ -20,14 +22,17 @@ const ItemPage = () => {
     const [blocks, setBlocks] = useState([]);
     const [notificationActive, setNotificationActive] = useState(false);
     const [notificationText, setNotificationText] = useState('');
-    const [minAmount, setMinAmount] = useState(null);
+    const [curAmount, setCurAmount] = useState(null);
 
     useEffect(() => {
-        const curSneaker = items.find((item) => item.id === id);
-        setSneaker(curSneaker);
-        const sizes = curSneaker.sizes.map((size) => size.amount);
-        setMinAmount(Math.min(...sizes));
-        setBlocks(curSneaker.sizes.map((size) => ({id: uid(), color: '#000000', backgroundColor: '#FFFFFF', size: size })));
+        fetchOneItem(id).then(data => {
+            setSneaker(data);
+            const sizes = data.sizes.map((size) => size.amount);
+            setCurAmount(Math.min(...sizes));
+            setBlocks(data.sizes.map((size) => ({id: uid(), color: '#000000', backgroundColor: '#FFFFFF', size: size })));
+        });
+        // const curSneaker = items.find((item) => item.id === id);
+        // setSneaker(curSneaker);
     }, [id]);
     
     const [sz, setSz] = useState(null);
@@ -44,6 +49,7 @@ const ItemPage = () => {
     const handleBlockClick = (id) => {
         const newBlocks = blocks.map((block) => {
             if (block.id === id) {
+                setCurAmount(block.size.amount);
                 setSz(block.size.size);
                 return { ...block, color: '#FFFFFF', backgroundColor: '#000000' };
             } else {
@@ -53,11 +59,9 @@ const ItemPage = () => {
         setBlocks(newBlocks);
     }
 
-    // useEffect(() => {
-    //     fetchOneItem(id).then(data => setSneaker(data))
-    // }, [id])
-
-    // Раскомментировать код выше и заменить
+    const get_first_image = (data) => {
+        return data[0]
+    }
 
     useEffect(() => {
         localStorage.setItem('basket', JSON.stringify(bsk))
@@ -77,7 +81,7 @@ const ItemPage = () => {
             if(!Boolean(bsk.find((b) => b.id === sneaker.id && b.size === sz))) {
                 const newBskItem = {
                     id: sneaker.id,
-                    image: sneaker.image,
+                    image: get_first_image(sneaker.images),
                     brand: sneaker.brand,
                     model: sneaker.model,
                     type: sneaker.type,
@@ -119,13 +123,12 @@ const ItemPage = () => {
             )}
             <div className="item__images">
                 <div className="item__images-main">
-                    <img className="item__img main__image" src={img} alt={sneaker.model} />
+                    <img className="item__img main__image" src={process.env.REACT_APP_SERVER_ADDRESS + '/' + get_first_image(sneaker.images)} alt={sneaker.model} />
                 </div>
                 <div className="item__images-others">
-                    <img className="item__img" src={img} alt={sneaker.model} />
-                    <img className="item__img" src={img} alt={sneaker.model} />
-                    <img className="item__img" src={img} alt={sneaker.model} />
-                    <img className="item__img" src={img} alt={sneaker.model} />
+                    {sneaker.images.slice(1).map((image) => (
+                        <img key={uid()} className="item__img" src={process.env.REACT_APP_SERVER_ADDRESS + '/' + image} alt={sneaker.model} />
+                    ))}
                 </div>
             </div>
             <div className="item__info">
@@ -136,9 +139,9 @@ const ItemPage = () => {
                     {sneaker.colors.join('/').toLowerCase()}
                 </h2>
                 <h3 className="item__info-article">
-                    Артикул: {sneaker.article}
+                    Артикул: {sneaker.vendor_code}
                 </h3>
-                <div className="item__info-price">{minAmount} руб</div>
+                <div className="item__info-price">{curAmount} руб</div>
                 <div className="item__size-block">
                     <div className="item__size-block-title">
                         <div className="item__size-block-left-title">

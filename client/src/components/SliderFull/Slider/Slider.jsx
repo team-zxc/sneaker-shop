@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext } from 'react';
 import PropTypes from "prop-types";
-import rateItems from "../../../rathingItems";
+// import rateItems from "../../../rathingItems";
 
 import Arrows from "../Arrows/Arrows";
 import Dots from "../Dots/Dots";
@@ -9,6 +9,7 @@ import Slide from "../Slide/Slide";
 
 import "./Slider.css";
 import {Link} from "react-router-dom";
+import {fetchPopularItems} from "../../../http/itemApi";
 
 export const SliderContext = createContext(null);
 
@@ -17,10 +18,14 @@ const Slider = function ({ width, height, autoPlay, autoPlayTime }) {
     const [slide, setSlide] = useState(0);
     const [animation, setAnimation] = useState(true);
 
+    const get_first_image = (data) => {
+        return data[0]
+    }
+
     useEffect(() => {
         const loadData = () => {
-            // fetchItems().then(data => setItems(data))
-            setItems(rateItems);
+            fetchPopularItems(6).then(data => setItems(data))
+            // setItems(rateItems);
         };
         loadData();
     }, []);
@@ -29,9 +34,9 @@ const Slider = function ({ width, height, autoPlay, autoPlayTime }) {
         const prevItemIndex = slide - 1 < 0 ? items.length - 1 : slide - 1;
         const nextItemIndex = (slide + 1) % items.length;
 
-        new Image().src = items[slide].image;
-        new Image().src = items[prevItemIndex].image;
-        new Image().src = items[nextItemIndex].image;
+        new Image().src = get_first_image(items[slide].images);
+        new Image().src = get_first_image(items[prevItemIndex].images);
+        new Image().src = get_first_image(items[nextItemIndex].images);
     }
 
     useEffect(() => {
@@ -84,11 +89,11 @@ const Slider = function ({ width, height, autoPlay, autoPlayTime }) {
         return () => {
             clearInterval(interval);
         };
-    }, [items.length, slide]); // when images uploaded or slide changed manually we start timer
+    }, [items.length, slide]); // when static uploaded or slide changed manually we start timer
 
     return (
         <div style={{ width, height }} className="slider">
-            <div className="slider__title">Популярные модели</div>
+            <div className="slider__title">Популярное</div>
             <SliderContext.Provider
                 value={{
                     goToSlide,

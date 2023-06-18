@@ -1,5 +1,5 @@
 import React from "react";
-import img from '../../../assets/test.webp';
+// import img from '../../../assets/test.webp';
 
 import "./SlideImage.css";
 
@@ -9,6 +9,6 @@ import "./SlideImage.css";
 
 export default function SlideImage({ src, alt }) {
     return (
-        <img src={img} alt={alt} className="slide-image" />
+        <img src={src} alt={alt} className="slide-image" />
     );
 }
