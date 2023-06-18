@@ -62,10 +62,10 @@ def create_order(request):
 
     msg = MIMEMultipart()
 
-    msg['To'] = data.contacts.email
+    msg['To'] = data['contacts']['email']
     msg['Subject'] = "Новый заказ"
 
-    msg.attach(MIMEText(str(data.items), 'plain'))
+    msg.attach(MIMEText(str(data['items']), 'plain'))
 
 
     # Поменять в зависимости от почты
