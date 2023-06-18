@@ -163,7 +163,7 @@ class Images(models.Model):
         verbose_name='Название'
     )
 
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='api/static')
 
     def __str__(self):
         return self.image.name

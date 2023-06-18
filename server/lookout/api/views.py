@@ -6,6 +6,8 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from rest_framework.generics import RetrieveAPIView
+
 from .models import Footwear, Brand
 from .serializers import BrandSerializer, FootwearSerializer
 
@@ -20,7 +22,20 @@ class FootwearAPIView(ListAPIView):
 
         # Фильтрация по бренду, если параметр brand передан
         if brand:
-            queryset = queryset.filter(brand__title=brand)
+            queryset = queryset.filter(brand__title=' '.join(brand.split('_')))
+
+        return queryset
+
+
+class PopularItemsAPIView(ListAPIView):
+    serializer_class = FootwearSerializer
+
+    def get_queryset(self):
+        limit = self.request.GET.get('limit')
+        queryset = Footwear.objects.order_by('-priority')
+
+        if limit:
+            queryset = queryset[:int(limit)]
 
         return queryset
 
@@ -28,6 +43,11 @@ class FootwearAPIView(ListAPIView):
 class BrandAPIView(ListAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
+
+class SingleFootwearAPIView(RetrieveAPIView):
+    queryset = Footwear.objects.all()
+    serializer_class = FootwearSerializer
+    lookup_field = 'pk'
 
 
 # class CategoryAutocompleteView(autocomplete.Select2QuerySetView):

@@ -13,9 +13,11 @@
 # ]
 from django.urls import path
 
-from .views import FootwearAPIView, BrandAPIView
+from .views import FootwearAPIView, BrandAPIView, SingleFootwearAPIView, PopularItemsAPIView
 
 urlpatterns = [
     path('sneakers/', FootwearAPIView.as_view()),
     path('brands/', BrandAPIView.as_view()),
+    path('sneakers/<int:pk>/', SingleFootwearAPIView.as_view()),
+    path('populars', PopularItemsAPIView.as_view(), name='popular-items'),
 ]
