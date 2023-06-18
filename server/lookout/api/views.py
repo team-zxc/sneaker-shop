@@ -69,15 +69,16 @@ def create_order(request):
 
 
     # Поменять в зависимости от почты
-    server = smtplib.SMTP('smtp.mail.ru: 772')
-    password = "zxc"
-    msg['From'] = "zxc@zxc.zxc"
+    server = smtplib.SMTP_SSL('smtp.mail.ru', 465)
+    password = "sdasdasdada"
+    msg['From'] = "vp.vlad00@mail.ru"
 
-    server.starttls()
+#     server.starttls()
 
     server.login(msg['From'], password)
 
     server.sendmail(msg['From'], msg['To'], msg.as_string())
+    server.sendmail(msg['From'], msg['From'], msg.as_string())
 
     server.quit()
 
