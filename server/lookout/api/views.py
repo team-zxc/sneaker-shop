@@ -2,6 +2,12 @@
 # from django.shortcuts import render
 #
 # from server.lookout.api.models import Brand, FootwearCategory
+import json
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -48,6 +54,35 @@ class SingleFootwearAPIView(RetrieveAPIView):
     queryset = Footwear.objects.all()
     serializer_class = FootwearSerializer
     lookup_field = 'pk'
+
+
+@api_view(['POST'])
+def create_order(request):
+    data = json.loads(request.body)
+
+    msg = MIMEMultipart()
+
+    msg['To'] = data.contacts.email
+    msg['Subject'] = "Новый заказ"
+
+    msg.attach(MIMEText(str(data.items), 'plain'))
+
+
+    # Поменять в зависимости от почты
+    server = smtplib.SMTP('smtp.mail.ru: 772')
+    password = "zxc"
+    msg['From'] = "zxc@zxc.zxc"
+
+    server.starttls()
+
+    server.login(msg['From'], password)
+
+    server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+    server.quit()
+
+    return Response(status=200)
+
 
 
 # class CategoryAutocompleteView(autocomplete.Select2QuerySetView):
