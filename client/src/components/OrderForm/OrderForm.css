@@ -131,11 +131,15 @@ button:hover {
 }
 
 .valid__message {
+    text-align: center;
+    font-size: 12px;
+    width: 170px;
+    line-height: 1;
     color: red;
     position: absolute;
-    top: calc(50% - 15px/2);
+    top: 50%;
     right: 0;
-    transform: translateY(-5px);
+    transform: translateY(-2px);
 }
 
 .focus-input {
@@ -236,12 +240,29 @@ button:hover {
 }
 
 .order-form__btn:disabled {
-    border: 2px solid red;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 25px;
 }
 
 .wrap__btn:hover .anim {
     left: 0;
+}
+
+.input-validation-square {
+    width: 16px;
+    height: 16px;
+    background-image: url("../../assets/error.png");
+    position: absolute;
+    top: calc(50% - 2px);
+    right: 10px;
+    transform: translateY(-10%);
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.input-validation-square.active {
+    opacity: 0.7;
 }
 
 @media (max-width: 576px) {

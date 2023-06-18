@@ -12,6 +12,9 @@ const OrderForm = ({ handleDone, handleClose }) => {
     const [emailError, setEmailError] = useState("Email must not be empty");
     const [phoneError, setPhoneError] = useState("Phone must not be empty");
     const [formValid, setFormValid] = useState(false);
+    const [nameHovered, setNameHovered] = useState(false);
+    const [emailHovered, setEmailHovered] = useState(false);
+    const [phoneHovered, setPhoneHovered] = useState(false);
 
     useEffect(() => {
         if(nameError || emailError || phoneError) {
@@ -29,8 +32,10 @@ const OrderForm = ({ handleDone, handleClose }) => {
             if(!e.target.value) {
                 setNameError("Name must not be empty");
             }
+            setNameHovered(true);
         } else {
             setNameError("");
+            setNameHovered(false);
         }
     };
 
@@ -42,8 +47,10 @@ const OrderForm = ({ handleDone, handleClose }) => {
             if(!e.target.value) {
                 setEmailError("Email must not be empty");
             }
+            setEmailHovered(true);
         } else {
             setEmailError("");
+            setEmailHovered(false);
         }
     };
 
@@ -56,8 +63,10 @@ const OrderForm = ({ handleDone, handleClose }) => {
             if(!e.target.value) {
                 setPhoneError("Phone must not be empty");
             }
+            setPhoneHovered(true);
         } else {
             setPhoneError("");
+            setPhoneHovered(false);
         }
     };
 
@@ -85,6 +94,22 @@ const OrderForm = ({ handleDone, handleClose }) => {
         }
     };
 
+    const handleMouseLeave = (e) => {
+        switch (e.target.name) {
+            case 'name':
+                setNameHovered(false);
+                break;
+            case 'email':
+                setEmailHovered(false);
+                break;
+            case 'tel':
+                setPhoneHovered(false);
+                break;
+            default:
+                break;
+        }
+    };
+
     return (
         <div className="limiter">
             <div className="order-form__container">
@@ -96,28 +121,94 @@ const OrderForm = ({ handleDone, handleClose }) => {
                         <span className="order-form__title">Welcome</span>
                         <div className="order-form__logo"></div>
                         <div className="order-form__wrap-input">
-                            {(nameDirty && nameError) && <div className="valid__message">{nameError}</div>}
-                            <input value={name} onBlur={e => blurHandler(e)} type="text" className="input" name="name" onChange={(e) => {
-                                isHasVal(e);
-                                nameHandler(e);
-                            }} />
+                            {(nameDirty && nameError) && (
+                                <div
+                                    className="valid__message"
+                                    style={{ visibility: nameHovered ? 'visible' : 'hidden' }}
+                                >
+                                    {nameError}
+                                </div>
+                            )}
+                            <input
+                                value={name}
+                                onBlur={e => blurHandler(e)}
+                                onMouseLeave={(e) => handleMouseLeave(e)}
+                                type="text"
+                                className="input"
+                                name="name"
+                                onChange={(e) => {
+                                    isHasVal(e);
+                                    nameHandler(e);
+                                }}
+                            />
                             <span className="focus-input" data-placeholder="Name"></span>
+                            {nameError &&
+                                <div
+                                    className={`input-validation-square ${nameHovered ? 'active' : ''}`}
+                                    onMouseEnter={() => setNameHovered(true)}
+                                    onMouseLeave={() => setNameHovered(false)}
+                                ></div>
+                            }
                         </div>
                         <div className="order-form__wrap-input">
-                            {(emailDirty && emailError) && <div className="valid__message">{emailError}</div>}
-                            <input value={email} onBlur={e => blurHandler(e)} type="email" className="input" name="email" onChange={(e) => {
-                                isHasVal(e);
-                                emailHandler(e);
-                            }} />
+                            {(emailDirty && emailError) && (
+                                <div
+                                    className="valid__message"
+                                    style={{ visibility: emailHovered ? 'visible' : 'hidden' }}
+                                >
+                                    {emailError}
+                                </div>
+                            )}
+                            <input
+                                value={email}
+                                onBlur={e => blurHandler(e)}
+                                onMouseLeave={(e) => handleMouseLeave(e)}
+                                type="email"
+                                className="input"
+                                name="email"
+                                onChange={(e) => {
+                                    isHasVal(e);
+                                    emailHandler(e);
+                                }}
+                            />
                             <span className="focus-input" data-placeholder="Email"></span>
+                            {emailError &&
+                                <div
+                                    className={`input-validation-square ${emailHovered ? 'active' : ''}`}
+                                    onMouseEnter={() => setEmailHovered(true)}
+                                    onMouseLeave={() => setEmailHovered(false)}
+                                ></div>
+                            }
                         </div>
                         <div className="order-form__wrap-input">
-                            {(phoneDirty && phoneError) && <div className="valid__message">{phoneError}</div>}
-                            <input value={phone} onBlur={e => blurHandler(e)} type="tel" className="input" name="tel" onChange={(e) => {
-                                isHasVal(e);
-                                phoneHandler(e);
-                            }} />
+                            {(phoneDirty && phoneError) && (
+                                <div
+                                    className="valid__message"
+                                    style={{ visibility: phoneHovered ? 'visible' : 'hidden' }}
+                                >
+                                    {phoneError}
+                                </div>
+                            )}
+                            <input
+                                value={phone}
+                                onBlur={e => blurHandler(e)}
+                                onMouseLeave={(e) => handleMouseLeave(e)}
+                                type="tel"
+                                className="input"
+                                name="tel"
+                                onChange={(e) => {
+                                    isHasVal(e);
+                                    phoneHandler(e);
+                                }}
+                            />
                             <span className="focus-input" data-placeholder="Phone"></span>
+                            {phoneError &&
+                                <div
+                                    className={`input-validation-square ${phoneHovered ? 'active' : ''}`}
+                                    onMouseEnter={() => setPhoneHovered(true)}
+                                    onMouseLeave={() => setPhoneHovered(false)}
+                                ></div>
+                            }
                         </div>
                         <div className="container__order-form-btn">
                             <div className="wrap__btn">
