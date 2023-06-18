@@ -9,6 +9,11 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class OrderSerializer(serializers.Serializer):
+    pass
+
+
+
 class FootwearSerializer(serializers.ModelSerializer):
     category = serializers.CharField(source='get_category_display')
     brand = serializers.CharField(source='get_brand_display')
