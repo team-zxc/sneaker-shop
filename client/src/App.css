@@ -70,6 +70,12 @@
     font-weight: 900;
     font-style: normal;
 }
+@font-face {
+    font-family: "Robtronika";
+    src: url("./fonts/robtronika/Robtronika.woff") format("woff"), url("./fonts/robtronika/Robtronika.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
 
 /* Указываем box sizing */
 *,

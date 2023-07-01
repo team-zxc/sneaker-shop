@@ -24,7 +24,7 @@ const Slider = function ({ width, height, autoPlay, autoPlayTime }) {
 
     useEffect(() => {
         const loadData = () => {
-            fetchPopularItems(6).then(data => setItems(data))
+            fetchPopularItems(8).then(data => setItems(data))
             // setItems(rateItems);
         };
         loadData();

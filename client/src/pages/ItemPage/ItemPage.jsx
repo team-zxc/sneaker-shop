@@ -13,9 +13,6 @@ import {fetchOneItem} from "../../http/itemApi";
 
 const ItemPage = () => {
     const [notificationTimer, setNotificationTimer] = useState(null);
-    const clearNotificationTimer = () => {
-        clearTimeout(notificationTimer);
-    };
     const { basketItem } = useContext(Context);
     const [sneaker, setSneaker] = useState(null);
     const { id } = useParams();
@@ -23,6 +20,10 @@ const ItemPage = () => {
     const [notificationActive, setNotificationActive] = useState(false);
     const [notificationText, setNotificationText] = useState('');
     const [curAmount, setCurAmount] = useState(null);
+    const [isAddingToCart, setIsAddingToCart] = useState(false);
+    const clearNotificationTimer = () => {
+        clearTimeout(notificationTimer);
+    };
 
     useEffect(() => {
         fetchOneItem(id).then(data => {
@@ -44,6 +45,7 @@ const ItemPage = () => {
         e.preventDefault();
         clearNotificationTimer();
         setNotificationActive(false);
+        setIsAddingToCart(false);
     }
 
     const handleBlockClick = (id) => {
@@ -77,7 +79,9 @@ const ItemPage = () => {
 
     const handleAdd = (event) => {
         event.preventDefault();
-        if(sz !== null) {
+        if(sz !== null && !isAddingToCart) {
+            setIsAddingToCart(true);
+
             if(!Boolean(bsk.find((b) => b.id === sneaker.id && b.size === sz))) {
                 const newBskItem = {
                     id: sneaker.id,
@@ -94,17 +98,21 @@ const ItemPage = () => {
                 setNotificationText(`Товар с размером ${sz} добавлен в корзину!`);
                 setNotificationActive(true);
                 basketItem.addItem(newBskItem);
+
                 // Запускаем таймер для автоматического закрытия уведомления
                 const timer = setTimeout(() => {
                     setNotificationActive(false);
+                    setIsAddingToCart(false); // Сбрасываем состояние isAddingToCart
                 }, 3000);
                 setNotificationTimer(timer);
             } else {
                 setNotificationText('Такой товар уже в корзине!');
                 setNotificationActive(true);
+
                 // Запускаем таймер для автоматического закрытия уведомления
                 const timer = setTimeout(() => {
                     setNotificationActive(false);
+                    setIsAddingToCart(false); // Сбрасываем состояние isAddingToCart
                 }, 3000);
                 setNotificationTimer(timer);
             }

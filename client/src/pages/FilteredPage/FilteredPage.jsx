@@ -35,11 +35,12 @@ const FilteredPage = observer(() => {
         fetchBrands().then(data => setBrands(data));
         // setBrands(brands_file);
         fetchItems(searchParams.get("brand")).then(data => item.setItems(customize_items(data)));
-        const param = brands.find((brand) => brand.split(" ").join("_") === searchParams.get("brand"));
-        if (param == null) {
-            setPar("Все пары");
-        } else {
+        const param = searchParams.get("brand").split("_").join(" ");
+        console.log(param)
+        if (param) {
             setPar(param);
+        } else {
+            setPar("Все пары");
         }
     }, [searchParams]);
 

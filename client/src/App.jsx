@@ -24,7 +24,7 @@ const App = observer(() => {
     if (loading) {
         return (
             <Spinner animation='border' role="status">
-                <span className="visually-hidden">Загрузка...</span>
+                <span className="visually-hidden"></span>
             </Spinner>
         );
     }

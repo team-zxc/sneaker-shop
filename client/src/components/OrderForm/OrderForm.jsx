@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import "./OrderForm.css";
+import Spinner from 'react-bootstrap/Spinner';
 
-const OrderForm = ({ handleDone, handleClose }) => {
+const OrderForm = ({ handleDone, handleClose, statusFlag }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [nameDirty, setNameDirty] = useState(false);
     const [emailDirty, setEmailDirty] = useState(false);
     const [phoneDirty, setPhoneDirty] = useState(false);
-    const [nameError, setNameError] = useState("Name must not be empty");
-    const [emailError, setEmailError] = useState("Email must not be empty");
-    const [phoneError, setPhoneError] = useState("Phone must not be empty");
+    const [nameError, setNameError] = useState("Поле не должно быть пустым");
+    const [emailError, setEmailError] = useState("Поле не должно быть пустым");
+    const [phoneError, setPhoneError] = useState("Поле не должно быть пустым");
     const [formValid, setFormValid] = useState(false);
     const [nameHovered, setNameHovered] = useState(false);
     const [emailHovered, setEmailHovered] = useState(false);
@@ -26,16 +27,16 @@ const OrderForm = ({ handleDone, handleClose }) => {
 
     const nameHandler = (e) => {
         setName(e.target.value);
-        const re = /^[A-Z][a-z]*$/;
+        const re = /^[a-zA-Zа-яА-Я0-9\s]*$/;
         if(!re.test(String(e.target.value))) {
-            setNameError("The name must begin with a capital letter");
-            if(!e.target.value) {
-                setNameError("Name must not be empty");
-            }
+            setNameError("Не должно содержать спец. символы");
             setNameHovered(true);
         } else {
             setNameError("");
             setNameHovered(false);
+        }
+        if(!e.target.value) {
+            setNameError("Поле не должно быть пустым");
         }
     };
 
@@ -43,14 +44,14 @@ const OrderForm = ({ handleDone, handleClose }) => {
         setEmail(e.target.value);
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(String(e.target.value).toLowerCase())) {
-            setEmailError("Valid is abc@def.hi");
-            if(!e.target.value) {
-                setEmailError("Email must not be empty");
-            }
+            setEmailError("example@example.ru");
             setEmailHovered(true);
         } else {
             setEmailError("");
             setEmailHovered(false);
+        }
+        if(!e.target.value) {
+            setEmailError("Поле не должно быть пустым");
         }
     };
 
@@ -59,14 +60,14 @@ const OrderForm = ({ handleDone, handleClose }) => {
         // eslint-disable-next-line
         const re = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/gm;
         if (!re.test(String(e.target.value).toLowerCase())) {
-            setPhoneError("Uncorrected phone: +79876543210");
-            if(!e.target.value) {
-                setPhoneError("Phone must not be empty");
-            }
+            setPhoneError("+7XXXXXXXXXX или 8XXXXXXXXXX");
             setPhoneHovered(true);
         } else {
             setPhoneError("");
             setPhoneHovered(false);
+        }
+        if(!e.target.value) {
+            setPhoneError("Поле не должно быть пустым");
         }
     };
 
@@ -117,7 +118,7 @@ const OrderForm = ({ handleDone, handleClose }) => {
                     <span className="close__btn"></span>
                 </div>
                 <div className="wrapper">
-                    <form className="order-form__content" onSubmit={handleDone}>
+                    <form className="order-form__content" onSubmit={(event) => handleDone(event, {name, email, phone})}>
                         <span className="order-form__title">Welcome</span>
                         <div className="order-form__logo"></div>
                         <div className="order-form__wrap-input">
@@ -213,7 +214,20 @@ const OrderForm = ({ handleDone, handleClose }) => {
                         <div className="container__order-form-btn">
                             <div className="wrap__btn">
                                 <div className="anim"></div>
-                                <button disabled={!formValid} type="submit" className="order-form__btn">Отправить</button>
+                                {statusFlag
+                                    ?
+                                    <Spinner animation='border' role="status">
+                                        <span className="visually-hidden fix"></span>
+                                    </Spinner>
+                                    :
+                                    <button
+                                        disabled={!formValid}
+                                        type="submit"
+                                        className="order-form__btn"
+                                    >
+                                        Отправить
+                                    </button>
+                                }
                             </div>
                         </div>
                     </form>

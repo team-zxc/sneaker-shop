@@ -12,7 +12,8 @@ const BasketTable = observer(() => {
     const { basketItem } = useContext(Context);
     const [basketItemsState, setBasketItemsState] = useState(basketItem.items);
     const [flag, setFlag] = useState(false);
-    const [formData, setFormData] = useState({ name: '', email: '', tel: '' });
+    const [statusFlag, setStatusFlag] = useState(false);
+    // const [formData, setFormData] = useState({ name: '', email: '', tel: '' });
 
     const updateBasket = (itemId, size, count) => {
         const updatedBasket = basketItemsState.map((item) => {
@@ -46,19 +47,18 @@ const BasketTable = observer(() => {
         setFlag(true);
     };
 
-    const handleDone = (e) => {
-        e.preventDefault()
-        const { name, email, tel } = e.currentTarget;
-        setFormData({ name: name.value, email: email.value, tel: tel.value });
+    const handleDone = (event, formData) => {
+        event.preventDefault()
         // сохранить и вызвать функцию сборки нужой инфы и отправить на сервер
         const combinedData = {
             contacts: formData,
-           items: Object.entries(toJS(basketItem.items)).map(([key, value]) =>  ({
+            items: Object.entries(toJS(basketItem.items)).map(([key, value]) =>  ({
                 id: value.id,
                 size: value.size,
                 count: value.count
             })),
         }
+        setStatusFlag(true);
         // console.log(combinedData);
         // Отправка POST-запроса на сервер
         fetch(process.env.REACT_APP_SERVER_ADDRESS + '/api/v1/order/', {
@@ -68,17 +68,23 @@ const BasketTable = observer(() => {
             },
             body: JSON.stringify(combinedData),
         })
-        .then((response) => response.json())
-        .then((data) => {
-            // Обработка ответа от сервера
-            console.log(data);
+        .then((response) => {
+            if (response.status === 200) {
+                setStatusFlag(false);
+                setFlag(false);
+            } else {
+                const timer = setTimeout(() => {
+                    setStatusFlag(false);
+                    setFlag(false);
+                }, 3000);
+            }
         })
-        .catch((error) => {
-            // Обработка ошибок
-            console.error(error);
-        });
+        // .catch((error) => {
+        //     // Обработка ошибок
+        //     console.error(error);
+        // });
 
-        setFlag(false);
+
     };
 
     const handleClose = (e) => {
@@ -88,7 +94,7 @@ const BasketTable = observer(() => {
 
     return (
         <div className="table__container">
-            {flag && <OrderForm handleDone={handleDone} handleClose={handleClose} />}
+            {flag && <OrderForm handleDone={handleDone} handleClose={handleClose} statusFlag={statusFlag} />}
             <form className="table__custom" onSubmit={handleSend}>
                 <div className="rows__container">
                     <BasketTableHeader />

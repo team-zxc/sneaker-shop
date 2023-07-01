@@ -205,12 +205,15 @@ button:hover {
 
 .wrap__btn {
     width: 100%;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     z-index: 1;
     border-radius: 25px;
     overflow: hidden;
     margin: 0 auto;
+    min-height: 50px;
 }
 
 .anim {
@@ -240,6 +243,7 @@ button:hover {
 }
 
 .order-form__btn:disabled {
+    cursor: not-allowed;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 25px;
 }
@@ -263,6 +267,10 @@ button:hover {
 
 .input-validation-square.active {
     opacity: 0.7;
+}
+
+.fix {
+
 }
 
 @media (max-width: 576px) {

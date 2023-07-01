@@ -1,8 +1,10 @@
 .slide-image {
     display: flex;
+    justify-content: center;
+    align-items: center;
     max-height: 300px;
-    width: 100%;
-    object-fit: contain;
-    object-position: center;
+    width: 55%;
+    object-fit: cover;
+    object-position: center center;
     border-radius: 20px;
 }
