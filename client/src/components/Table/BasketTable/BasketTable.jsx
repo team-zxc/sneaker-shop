@@ -7,6 +7,7 @@ import './BasketTable.css';
 import { Context } from '../../../index';
 import OrderForm from "../../OrderForm/OrderForm";
 import { toJS } from 'mobx';
+import Notification from "../../../components/Notification/Notification";
 
 const BasketTable = observer(() => {
     const { basketItem } = useContext(Context);
@@ -14,6 +15,13 @@ const BasketTable = observer(() => {
     const [flag, setFlag] = useState(false);
     const [statusFlag, setStatusFlag] = useState(false);
     // const [formData, setFormData] = useState({ name: '', email: '', tel: '' });
+
+    const [notificationActive, setNotificationActive] = useState(false);
+    const [notificationText, setNotificationText] = useState('');
+    const [notificationTimer, setNotificationTimer] = useState(null);
+    const clearNotificationTimer = () => {
+        clearTimeout(notificationTimer);
+    };
 
     const updateBasket = (itemId, size, count) => {
         const updatedBasket = basketItemsState.map((item) => {
@@ -72,10 +80,26 @@ const BasketTable = observer(() => {
             if (response.status === 200) {
                 setStatusFlag(false);
                 setFlag(false);
+                setNotificationText('Заказ был успешно оформлен!');
+                setNotificationActive(true);
+
+                // Запускаем таймер для автоматического закрытия уведомления
+                const timerNotification = setTimeout(() => {
+                    setNotificationActive(false);
+                }, 3000);
+                setNotificationTimer(timerNotification);
             } else {
                 const timer = setTimeout(() => {
                     setStatusFlag(false);
                     setFlag(false);
+                    setNotificationText('Заказ не был оформлен!');
+                    setNotificationActive(true);
+
+                    // Запускаем таймер для автоматического закрытия уведомления
+                    const timerNotification = setTimeout(() => {
+                        setNotificationActive(false);
+                    }, 5000);
+                    setNotificationTimer(timerNotification);
                 }, 3000);
             }
         })
@@ -87,6 +111,12 @@ const BasketTable = observer(() => {
 
     };
 
+    const handleCloseNotification = (e) => {
+        e.preventDefault();
+        clearNotificationTimer();
+        setNotificationActive(false);
+    }
+
     const handleClose = (e) => {
         e.preventDefault()
         setFlag(false);
@@ -94,6 +124,9 @@ const BasketTable = observer(() => {
 
     return (
         <div className="table__container">
+            {notificationActive && (
+                <Notification info={notificationText} handleCloseNotification={handleCloseNotification} showActive={notificationActive} />
+            )}
             {flag && <OrderForm handleDone={handleDone} handleClose={handleClose} statusFlag={statusFlag} />}
             <form className="table__custom" onSubmit={handleSend}>
                 <div className="rows__container">

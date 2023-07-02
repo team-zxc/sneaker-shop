@@ -113,7 +113,7 @@ button:hover {
 .order-form__wrap-input {
     width: 100%;
     position: relative;
-    border-bottom: 2px solid #adadad;
+    border-bottom: 1px solid #adadad;
     margin-bottom: 37px
 }
 
@@ -133,12 +133,12 @@ button:hover {
 .valid__message {
     text-align: center;
     font-size: 12px;
-    width: 170px;
+    /*width: 170px;*/
     line-height: 1;
     color: red;
     position: absolute;
-    top: 50%;
-    right: 0;
+    top: 120%;
+    right: 10px;
     transform: translateY(-2px);
 }
 
@@ -156,10 +156,10 @@ button:hover {
     content: "";
     display: block;
     position: absolute;
-    bottom: -2px;
+    bottom: 0;
     left: 0;
     width: 0;
-    height: 2px;
+    height: 1px;
     transition: all 0.4s;
     background: #6a7dfe;
     background: linear-gradient(to left, #21d4fd, #b721ff);
