@@ -1,0 +1,58 @@
+const items = [
+    {
+        id: 's0',
+        rate: 10,
+        image: 'test.webp',
+        category: 'Кроссовки',
+        brand: 'Nike',
+        model: 'Air Jordan 1 Mid',
+        name: 'Dark Mocha',
+    },
+    {
+        id: 's1',
+        rate: 9,
+        image: 'test.webp',
+        category: 'Кроссовки',
+        brand: 'Nike',
+        model: 'Air Jordan 1 Mid',
+        name: 'Smoke Grey',
+    },
+    {
+        id: 's2',
+        rate: 8,
+        image: 'test.webp',
+        category: 'Кроссовки',
+        brand: 'Nike',
+        model: 'Air Jordan 1 Mid',
+        name: 'Pine Green',
+    },
+    {
+        id: 's3',
+        rate: 7,
+        image: 'test.webp',
+        category: 'Кроссовки',
+        brand: 'Nike',
+        model: 'Air Jordan 1 Mid',
+        name: 'White Shadow',
+    },
+    {
+        id: 's4',
+        rate: 6,
+        image: 'test.webp',
+        category: 'Кроссовки',
+        brand: 'Nike',
+        model: 'Air Jordan 1 Low',
+        name: 'Canyon Rust',
+    },
+    {
+        id: 's5',
+        rate: 5,
+        image: 'test.webp',
+        category: 'Кроссовки',
+        brand: 'New Balance',
+        model: '530',
+        name: '',
+    },
+];
+
+export default items;
