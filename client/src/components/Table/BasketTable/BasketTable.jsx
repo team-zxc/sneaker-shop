@@ -63,7 +63,8 @@ const BasketTable = observer(() => {
             items: Object.entries(toJS(basketItem.items)).map(([key, value]) =>  ({
                 id: value.id,
                 size: value.size,
-                count: value.count
+                count: value.count,
+                price: value.price
             })),
         }
         setStatusFlag(true);

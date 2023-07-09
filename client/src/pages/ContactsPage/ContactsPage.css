@@ -1,5 +1,4 @@
 .contacts__container {
-    width: 80%;
     margin: 50px auto;
     display: flex;
     flex-direction: column;
@@ -8,23 +7,92 @@
 }
 
 .contacts__title {
-
+    padding: 20px;
+    font-size: 40px;
+    font-family: Robtronika, sans-serif;
+    text-align: center;
 }
 
 .contacts__content {
     width: 100%;
+    margin-bottom: 50px;
 }
 
 .contacts__description {
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .links__container {
+    padding: 5% 10% calc(5% - 20px) 10% !important;
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.item__contacts {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.item__contacts {
+.item__link-cts {
+    background-color: #999999;
+    max-width: 250px;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    color: black;
+    opacity: 1;
+    transition: all 0.3s ease-in;
+}
 
+.item__icon {
+    width: 50px;
+    height: 50px;
+}
+
+.item__icon-phone {
+    background-image: url(../../assets/phone.svg);
+    background-position: center center;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.item__icon-email {
+    background-image: url(../../assets/email.svg);
+    background-position: center center;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.item__icon-telegram {
+    background-image: url(../../assets/telegram.svg);
+    background-position: center center;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.item__icon-vk {
+    background-image: url(../../assets/vk.svg);
+    background-position: center center;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.item__title-cts {
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    font-family: ProximaNova, sans-serif;
+    font-weight: 600;
+    color: black;
+}
+
+.item__link-cts:hover {
+    opacity: 0.75;
 }

@@ -90,6 +90,7 @@ def create_order(request):
 
     items = data['items']
     items_with_data = []
+    total_price = 0  # Переменная для хранения общей суммы заказа
     for item in items:
         item_id = item['id']
         item_data_unicode = get_item_data_by_id(item_id)  # Здесь получаем все данные элемента по его id из другой таблицы
@@ -98,9 +99,11 @@ def create_order(request):
             'data': item_data_unicode,
             'size': item['size'],
             'count': item['count'],
+            'price': item['price'],
             'images': item_data_unicode['images'] if item_data_unicode else []
         }
         items_with_data.append(item_with_data)
+        total_price += item_with_data['price'] * item['count']  # Расчет суммы заказа
 
     # Формирование текста сообщения
     message = f"Добрый день, {name}!\n\nВы оформили заказ:\n"
@@ -112,11 +115,13 @@ def create_order(request):
         item_name = item_with_data['data']['name']
         size = item_with_data['size']
         count = item_with_data['count']
+        price = item_with_data['price']
 
-        item_message = f"{category} {brand} {model} {item_name} размером {size} в количестве {count}"
+        item_message = f"{category} {brand} {model} {item_name} размером {size} в количестве {count}. Цена: {price} рублей"
         message += item_message + "\n"
 
-    message += "\nОжидайте, с вами свяжется продавец по номеру или почте.\n\nС уважением, Владислав Петров\nКонтакты:\nvp.vlad00@mail.ru\n89035101495\n@vinatian00"
+    message += f"\nСумма заказа: {total_price} рублей\n"  # Добавление суммы заказа
+    message += "\nОжидайте, с вами свяжется продавец по номеру или почте.\n\nС уважением, Владислав Петров\nКонтакты:\nEmail: vp.vlad00@mail.ru\nТелефон: 89035101495\nTelegram: @vinatian00"
 
     # Установка содержимого сообщения в формате HTML
     msg.attach(MIMEText(message, 'plain'))
@@ -142,14 +147,17 @@ def create_order(request):
         item_name = item_with_data['data']['name']
         size = item_with_data['size']
         count = item_with_data['count']
+        price = item_with_data['price']
         vendor_code = item_with_data['data'].get('vendor_code', '')
 
-        item_message = f"{category} {brand} {model} {item_name} размером {size} в количестве {count}. Артикул: {vendor_code}"
+        item_message = f"{category} {brand} {model} {item_name} размером {size} в количестве {count}. Артикул: {vendor_code}. Цена: {price} рублей"
         seller_message += item_message + "\n"
 
+    seller_message += f"\nСумма заказа: {total_price} рублей\n"  # Добавление суммы заказа
+
     seller_message += "\nКонтакты для связи с заказчиком:\n"
-    seller_message += data['contacts']['email'] + "\n"
-    seller_message += data['contacts']['phone'] + "\n"
+    seller_message += "Email: " + data['contacts']['email'] + "\n"
+    seller_message += "Телефон: " + data['contacts']['phone'] + "\n"
 
     # Отправка письма продавцу
     seller_msg = MIMEMultipart()
