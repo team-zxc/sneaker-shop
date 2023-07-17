@@ -54,7 +54,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',  # Добавьте адрес вашего фронтенд-сервера
+    'http://localhost:3000',
+    'https://sneaker-store-client.vercel.app', # Добавьте адрес вашего фронтенд-сервера
 ]
 
 ROOT_URLCONF = 'lookout.urls'
